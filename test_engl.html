@@ -1,0 +1,345 @@
+<html>
+<head>
+    <title>Тест</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div class="container">
+    <form id="options" class="form">
+        <div class="title">Настройка</div>
+        <!-- заполнится автоматически -->
+        <label class="label">
+            <div>Выберите тему:</div>
+            <select name="classes" id="classes">
+            </select>
+        </label>
+        <!-- заполнится автоматически -->
+        <label class="label" style="display:none">
+            Буква:
+            <select name="letters" id="letters" multiple>
+            </select>
+        </label>
+        <label class="label">
+            <div>Включить отсчет времени:</div>
+            <input id="starttimer" type="checkbox">
+        </label>        
+        <div>
+            <button class=button_opt id="btn_save">Сохранить и начать</button>
+            <button class=button_opt id="btn_opt1test">Результаты</button>
+        </div>
+    </form>
+    <form id="forma">
+        <input id="stopwatch" name=stopwatch size=10 value="00:00" disabled>
+        <!--<label>
+            
+            <textarea class="textarea" disabled="disabled" name="question"></textarea>
+        </label>-->
+        <div class="question_1"></div>
+        <br>
+        <label>
+            Ответ:
+            <textarea name="answer"></textarea>
+        </label>
+        <br>
+        <button id="btn_test1opt_dal" name="btn">Дальше</button>
+        <button id="btn_test1opt">Назад</button>
+        <button id="btn_result">Результаты</button>
+    </form>
+    <div id="result">
+        <div class="title">Результаты</div>
+        <button id="btn_res1test">Перейти к тесту</button>
+        <div id="result-table">
+        </div>
+    </div>
+
+    <a class="tohome" href="index.html">Домой</a>
+    
+</div>
+</main>
+<script src="main_engl.js"></script>
+ <script type="text/javascript">
+
+// localStorage.setItem("engl_opt_class", JSON.stringify(""));
+// localStorage.setItem("engl_opt_letter",JSON.stringify(["all"]));
+// localStorage.setItem("engl_opt_timer", JSON.stringify("N"));
+// localStorage.setItem("engl_result", JSON.stringify([]));
+
+
+    let state = "options";
+    let options = document.getElementById("options");
+    let form = document.getElementById("forma");
+    let result = document.getElementById("result");
+    let resultTable = document.getElementById("result-table");
+    // let starttimer = document.getElementById("starttimer");
+
+    let question = document.querySelector('.question_1');
+    let answer = form.answer;
+    let btn = form.btn;
+
+    function render_forms(){
+        switch (state){
+            case "options" : 
+                console.log("opt");
+                options.style.display = "flex";
+                form.style.display = "none";
+                result.style.display = "none";
+            break;
+            case "run-test" : 
+                console.log("test");
+                options.style.display = "none";
+                form.style.display = "flex";
+                result.style.display = "none";
+            break;
+            case "result" : 
+                console.log("result");
+                options.style.display = "none";
+                form.style.display = "none";
+                result.style.display = "block";
+            break;
+        }
+    }
+    let btn_save;
+    btn_save = document.getElementById("btn_save");
+    btn_save.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        engl_opt_class = select_class.value;
+        localStorage.setItem("engl_opt_class",engl_opt_class);
+        if(starttimer.checked)
+            {localStorage.setItem("engl_opt_timer","Y");}
+        else
+            {localStorage.setItem("engl_opt_timer","N");}
+        let selected = [];
+        for (let opt of select_letters.options) {
+            if (opt.selected)  selected.push(opt.value);
+        }
+        if (selected.includes("all") && selected.length > 1) {
+            alert("Нельзя выбрать Все буквы и любые другие одновременно.");
+        }else {
+            engl_opt_letter = selected;
+            localStorage.setItem("engl_opt_letter",JSON.stringify(engl_opt_letter));
+
+            data = null;
+            data = words.filter(filter_words);
+            console.log(words)
+            console.log(data.length)
+            if (data.length == 0) {
+                alert("Нет вопросов для теста. Выберите другой класс или букву.");
+            } else {
+                console.log(data);
+                console.log("click btn_save");
+                state = "run-test";
+                start_test();
+                render_forms();
+            }
+        }
+    });
+
+let btn_opt1test;
+btn_opt1test = document.getElementById("btn_opt1test");
+        btn_opt1test.addEventListener("click", (e) => {
+            e.preventDefault();
+            console.log("click btn_opt1test");
+            state = "result";
+            resultTable.innerHTML ='';
+            resultTable.append(show_result());
+            render_forms()
+        });
+
+let btn_test1opt;
+btn_test1opt = document.getElementById("btn_test1opt");
+        btn_test1opt.addEventListener("click", (e) => {
+            e.preventDefault();
+            console.log("click btn_test1opt");
+            state = "options";
+            StartStop();
+            render_forms()
+        });
+        
+let btn_result;
+btn_result = document.getElementById("btn_result");
+        btn_result.addEventListener("click", (e) => {
+            e.preventDefault();
+            console.log("click btn_result");
+            state = "result";
+            StartStop();
+            render_forms();
+            resultTable.innerHTML ='';
+            resultTable.append(show_result());
+        });
+
+let btn_res1test;
+btn_res1test = document.getElementById("btn_res1test");
+        btn_res1test.addEventListener("click", (e) => {
+            e.preventDefault();
+            console.log("click btn_res1test");
+            state = "run-test";
+            data = null;
+            data = words.filter(filter_words);
+            console.log(data);
+            if (data.length == 0) {
+                alert("Нет вопросов для теста. Выберите другой класс или букву.");
+            } else {
+                start_test();
+                render_forms();
+            }
+        });
+
+render_forms();
+
+
+        let headers = ["Вопросы", "Правильные ответы", "Ваши ответы"];
+
+        let answers = [];
+        // let rightAnswers = null;
+
+    function start_test() {
+        query_quest = [];
+        answers = [];
+        for(let i=0;i<data.length;i++) {
+            query_quest.push(i);
+        }
+        console.log("query_quest:",query_quest);
+
+        let ran = Math.floor(Math.random()*query_quest.length);
+        id = query_quest[ran];
+        query_quest.splice(ran, 1)
+        question.innerHTML = data[id][0];
+        console.log("starttimer",starttimer.checked)
+        if(starttimer.checked) {
+            init = 0;
+            StartStop();
+        }else {
+            init = 1;
+            StartStop();
+            stopwatch.value = "00:00";
+        }
+    }
+ 
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (answer.value === "") return false;
+        let ans = [data[id][0],data[id][1]];
+        ans[2] = answer.value;
+        answers.push(ans);
+        answer.value = "";
+        //if(id === data.length) {
+        if(query_quest.length<1){
+            form.style.display = "none";
+            // rightAnswers = answers.map((el, i) => el === data[i][1] ? i : undefined).filter(el => el !== undefined);
+            // result.append(show(data, headers, answers, rightAnswers));
+            StartStop();
+
+            resultTable.innerHTML ='';
+            let engl_result_cur = [];
+            resultTable.append(show(headers, answers, engl_result_cur));
+            engl_result.push(engl_result_cur);
+            resultTable.append(show_result());
+            console.log("engl_result_cur",engl_result_cur);
+            console.log("engl_result",engl_result);
+            localStorage.setItem('engl_result', JSON.stringify(engl_result));
+
+            state = "result";
+            render_forms();
+            return false;
+        }
+
+        let ran = Math.floor(Math.random()*query_quest.length);
+        id = query_quest[ran];
+        query_quest.splice(ran, 1)
+
+        question.innerHTML = data[id][0];
+        answer.focus();
+    });
+ 
+    function show(headers, answers, engl_result_cur) {
+        let table = document.createElement("table");
+        table.classList.add("result-table");
+        table.setAttribute("id", "tbl");
+        table.setAttribute("cellpadding", "0");
+        table.setAttribute("cellspacing", "0");
+
+        let tr = document.createElement("tr");
+        for (let i = 0; i < headers.length; i++) {
+            let td = document.createElement("th");
+            td.classList.add("result-table_cell");
+            td.innerHTML = headers[i];
+            tr.append(td);
+        }
+        table.append(tr);
+
+        let right = 0;
+        for (let i = 0; i < answers.length; i++) {
+            let tr = document.createElement("tr");
+            // console.log('всего ячеек: ', answers[i].length);
+            for (let j = 0; j < 2; j++) {
+                let td = document.createElement("td");
+                td.classList.add("result-table_cell");
+                td.innerHTML = answers[i][j];    
+                tr.append(td);
+            }
+            let td = document.createElement("td");
+            if(answers[i][1]==answers[i][2]){
+                td.classList.add("right");
+                right++;
+            }
+            else td.classList.add("error");
+            td.classList.add("result-table_cell");
+            td.innerHTML = answers[i][2];
+            tr.append(td);
+            table.append(tr);
+        }
+
+        tr = document.createElement("tr");
+        td = document.createElement("th");
+        td.classList.add("result-table_cell");
+        td.innerHTML = "Дата теста: ";
+        tr.append(td);
+        td = document.createElement("th");
+        td.classList.add("result-table_cell");
+        let currentDate = new Date();
+        // engl_result_cur [0] = currentDate;
+        let yy = currentDate.getFullYear();
+        let mm = String(currentDate.getMonth()).padStart(2, '0');
+        let dd = String(currentDate.getDate()).padStart(2, '0');
+        let hh = String(currentDate.getHours()).padStart(2, '0');
+        let m = String(currentDate.getMinutes()).padStart(2, '0');
+        td.innerHTML = yy+"."+mm+"."+dd+" "+hh+":"+m;
+        engl_result_cur [0] = yy+"."+mm+"."+dd+" "+hh+":"+m;
+        tr.append(td);
+        td = document.createElement("th");
+        td.classList.add("result-table_cell");
+        engl_result_cur [1] = right;
+        engl_result_cur [2] = answers.length;
+        td.innerHTML = right+"/"+answers.length;
+        tr.append(td);
+        engl_result_cur [3] = engl_opt_class;
+        engl_result_cur [4] = engl_opt_letter;
+        table.append(tr);
+
+        tr = document.createElement("tr");
+        td = document.createElement("th");
+        td.classList.add("result-table_cell");
+        td.innerHTML = "Время теста: ";
+        tr.append(td);
+        td = document.createElement("th");
+        td.classList.add("result-table_cell");
+        if(starttimer.checked){
+                engl_result_cur[5] = readout;
+            }else{
+                engl_result_cur[5] = "Без учета";
+        }
+        td.innerHTML = engl_result_cur[5];
+        tr.append(td);
+        td = document.createElement("th");
+        td.classList.add("result-table_cell");
+        td.innerHTML = "";
+        tr.append(td);
+        table.append(tr);
+        return table;
+    }
+
+    </script>
+</body>
+</html>
