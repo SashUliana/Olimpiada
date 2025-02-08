@@ -1,0 +1,376 @@
+* {padding: 0; margin: 0; box-sizing: border-box; font-family: Georgia, 'Times New Roman', Times, serif;}
+a{text-decoration: none;}
+a.tohome{
+    padding: 10px 25px;
+    background-color: #00ff99;
+    border-radius: 25px;
+    margin-top: 20px;
+    font-weight: 600;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+body{
+    background-color: #3a71ab;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size:14px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.container_1{
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size:14px;
+    position: relative;
+}
+
+.form, #forma {
+    margin-top: 100px;
+    padding: 50px;
+    background-color: #00ff99;
+    border-radius: 35px;
+
+    font-size: 20px;
+    text-align: center;
+    zoom: 150%;
+}
+
+#forma {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.form div{
+    margin-right: 15px;
+}
+.form div.title, #result div.title{
+    font-weight: 600;
+    font-size: 30px;
+    text-align: center;
+}
+#result div.title{
+    margin-bottom: 20px;
+}
+
+.form button, #btn_res1test{
+    padding: 10px 25px;
+    border-radius: 30px;
+}
+
+.form #classes, #lesson_classes, #btn_test1opt, #btn_result, #btn_test1opt_dal {
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #96c9ff;
+    font-weight: 600;
+}
+
+.a__wrapper {
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+    font-size: 17px;
+    transition: 0.1s ease;
+}
+
+.a__wrapper:hover{
+    scale: 1.1;
+}
+
+a {
+    color: rgb(0, 0, 0);
+}
+
+.prime__buttons{
+    zoom: 150%;
+    margin-top: 50px;
+}
+
+.prime_button{
+    margin-top: 60px;
+    padding: 20px 50px;
+    border-radius: 20px;
+    background-color: aqua;
+}
+.prime_button:not(:last-child){
+    margin-bottom: 30px;
+}
+
+select option {
+    color: #000000;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    border-color: rgb(255, 204, 204);
+}
+select option:active,section option:hover,textarea:focus,textarea:focus-visible {
+    outline: none;
+    background-color: beige;
+}
+.cards-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    /* gap: 16px; */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.card {
+    width: 30%;
+    font-family: 'Roboto';
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    flex-direction: column;
+    border: solid 1px #ffcccc;
+}
+.card:not(:nth-child(3n)) {
+    margin-right: 16px;
+}
+/* nth-last-child(-n+3) */
+.card {
+    margin-bottom: 16px;
+}
+
+
+.card-content {
+    padding: 16px;
+}
+
+.show {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    animation: fadeinout 1s linear;
+}
+
+p {
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    font-size: 20px;
+}
+
+h2 {
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    font-size: 22px;
+}
+
+.result-table {
+    width: 100%;
+    border: solid 1px #000000;
+}
+.result-table_cell {
+    border: solid 1px #000000;
+    
+}
+
+#tbl {
+    text-align: center;
+}
+th, td{
+    padding: 15px;
+}
+#forma {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    /* width: 400px; */
+    border-color: rgb(255, 204, 204);
+    /* border-radius: 20px; */
+}
+
+#forma textarea {
+    font-size: 28px;
+    text-align: center;
+    /* min-width: 400px; */
+    /* max-width: 400px; */
+    width: 100%;
+    min-height: 100px;
+    max-height: 100px;
+    resize: none;
+    background: rgb(255, 238, 238);;
+}
+
+#forma button {
+    text-align: center;
+    width: inherit;
+    border-color: #96c9ff;;
+}
+
+#forma button:focus-visible {
+    box-shadow: 0 0 0 2px #666;
+}
+#forma button:hover {
+    background-color: rgb(223, 176, 176);
+}
+#forma button:active {
+    transform: scale(0.96);
+}
+#forma button:disabled {
+    pointer-events: none;
+    opacity: 0.65;
+}
+
+textarea:active,textarea:focus,textarea:focus-visible {
+    outline: none;
+}
+
+#forma button:focus-visible {
+    background-color: rgb(255, 204, 204);
+    border-color: rgb(255, 204, 204);
+}
+
+#result{
+    margin-top: 150px;
+    background-color: #00ff99;
+    border-radius: 25px;
+    overflow: hidden;
+    zoom: 150%;
+    padding: 30px;
+    position: relative;
+}
+
+
+ul, ul li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#btn_res1test{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.button_opt, #btn_res1test{
+    text-align: center;
+    width: inherit;
+    background: #96c9ff;
+    border-color: #96c9ff;
+    color: rgb(0, 0, 0);
+
+}
+
+.btn_save {
+    text-align: center;
+    width: inherit;
+    background: rgb(255, 204, 204);
+    color: rgb(0, 0, 0);
+}
+
+.error {
+    color: rgb(255, 4, 4);
+}
+
+.right {
+    color: green;
+}
+
+#options {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.prime_button{
+    width: 100%;
+    height: 100px;
+    border-radius: 20px;
+}
+
+.prime_button:not(:last-child){
+    margin-bottom: 30px;
+}
+
+.card:not(:nth-child(3n)) {
+    margin-right: 16px;
+}
+
+.card {
+    margin-bottom: 16px;
+}
+
+.card-content {
+    padding: 16px;
+}
+
+p {
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    font-size: 20px;
+}
+
+h2 {
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    font-size: 22px;
+}
+
+.result-table {
+    width: 100%;
+}
+
+#forma textarea {
+    font-size: 28px;
+    text-align: center;
+    /* min-width: 400px; */
+    /* max-width: 400px; */
+    width: 100%;
+    min-height: 100px;
+    max-height: 100px;
+    resize: none;
+}
+
+#options {
+    gap: 24px;
+}
+
+@-webkit-keyframes fadeinout {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeinout {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
