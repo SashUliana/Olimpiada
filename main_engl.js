@@ -1,4 +1,7 @@
-
+localStorage.setItem("engl_opt_class", JSON.stringify(""));
+localStorage.setItem("engl_opt_letter",JSON.stringify(["all"]));
+localStorage.setItem("engl_opt_timer", JSON.stringify("N"));
+localStorage.setItem("engl_result", JSON.stringify([]));
 
 let words = [
     ["Напишите функцию is_palindrome(s), которая принимает строку и возвращает True, если строка является палиндромом, и False в противном случае. (В ответе вместо абзаца используйте один пробел)",
