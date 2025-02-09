@@ -2,13 +2,13 @@
 a{text-decoration: none;}
 a.tohome{
     padding: 10px 25px;
-    background-color: #00ff99;
+    background-color: #9dccff;
     border-radius: 25px;
     margin-top: 20px;
     font-weight: 600;
     position: absolute;
     top: 0;
-    right: 0;
+    right: 0; 
 }
 
 body{
@@ -96,7 +96,7 @@ a {
     margin-top: 60px;
     padding: 20px 50px;
     border-radius: 20px;
-    background-color: aqua;
+    background-color: #96c9ff;
 }
 .prime_button:not(:last-child){
     margin-bottom: 30px;
@@ -105,7 +105,7 @@ a {
 select option {
     color: #000000;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-    border-color: rgb(255, 204, 204);
+    border-color: rgb(14, 14, 250);
 }
 select option:active,section option:hover,textarea:focus,textarea:focus-visible {
     outline: none;
@@ -129,7 +129,7 @@ select option:active,section option:hover,textarea:focus,textarea:focus-visible 
     visibility: hidden;
     opacity: 0;
     flex-direction: column;
-    border: solid 1px #ffcccc;
+    border: solid 1px #3a71ab;
 }
 .card:not(:nth-child(3n)) {
     margin-right: 16px;
@@ -191,7 +191,7 @@ th, td{
     gap: 4px;
     text-align: center;
     /* width: 400px; */
-    border-color: rgb(255, 204, 204);
+    border-color: rgb(41, 82, 246);
     /* border-radius: 20px; */
 }
 
@@ -204,7 +204,7 @@ th, td{
     min-height: 100px;
     max-height: 100px;
     resize: none;
-    background: rgb(255, 238, 238);;
+    background: #89facd;
 }
 
 #forma button {
@@ -217,7 +217,7 @@ th, td{
     box-shadow: 0 0 0 2px #666;
 }
 #forma button:hover {
-    background-color: rgb(223, 176, 176);
+    background-color: #3392f8;
 }
 #forma button:active {
     transform: scale(0.96);
@@ -232,8 +232,8 @@ textarea:active,textarea:focus,textarea:focus-visible {
 }
 
 #forma button:focus-visible {
-    background-color: rgb(255, 204, 204);
-    border-color: rgb(255, 204, 204);
+    background-color: #96c9ff;
+    border-color: #96c9ff;
 }
 
 #result{
@@ -271,7 +271,7 @@ ul, ul li {
 .btn_save {
     text-align: center;
     width: inherit;
-    background: rgb(255, 204, 204);
+    background: #96c9ff;
     color: rgb(0, 0, 0);
 }
 
